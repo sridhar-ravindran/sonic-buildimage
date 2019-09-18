@@ -1,4 +1,0 @@
-#!/bin/bash
-
-cd /sys/devices/platform/SMF.512/hwmon/*
-echo 0xcc > mb_poweron_reason

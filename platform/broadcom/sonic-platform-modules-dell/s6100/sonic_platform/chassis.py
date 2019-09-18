@@ -234,16 +234,11 @@ class Chassis(ChassisBase):
             if (power_reason in self.power_reason_dict):
                 return (self.power_reason_dict[power_reason], None)
         else:
-            if (smf_mb_reg_reason == 0xaa):
-                return (ChassisBase.REBOOT_CAUSE_NON_HARDWARE, None)
-            elif ((smf_mb_reg_reason == 0xbb) or (smf_mb_reg_reason == 0xff)):
+            if ((smf_mb_reg_reason == 0xbb) or (smf_mb_reg_reason == 0xff)):
                 return (ChassisBase.REBOOT_CAUSE_POWER_LOSS, None)
-            elif (smf_mb_reg_reason == 0xdd):
-                return (ChassisBase.REBOOT_CAUSE_WATCHDOG, None)
-            elif (smf_mb_reg_reason == 0xee):
-                return (self.power_reason_dict[power_reason], None)
-            else:
-                return (ChassisBase.REBOOT_CAUSE_NON_HARDWARE, None)
+
+            if (reset_reason in self.reset_reason_dict):
+                return (self.reset_reason_dict[reset_reason], None)
 
         return (ChassisBase.REBOOT_CAUSE_HARDWARE_OTHER, "Invalid Reason")
 

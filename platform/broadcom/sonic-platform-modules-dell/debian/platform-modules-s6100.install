@@ -3,8 +3,6 @@ s6100/scripts/s6100_platform.sh usr/local/bin
 common/dell_i2c_utils.sh usr/local/bin
 common/io_rd_wr.py usr/local/bin
 s6100/scripts/platform_reboot_override usr/share/sonic/device/x86_64-dell_s6100_c2538-r0
-s6100/scripts/platform_plugin usr/share/sonic/device/x86_64-dell_s6100_c2538-r0
-s6100/scripts/track_reboot_reason.sh usr/share/sonic/device/x86_64-dell_s6100_c2538-r0
 s6100/scripts/override.conf /etc/systemd/system/systemd-reboot.service.d
 common/dell_lpc_mon.sh usr/local/bin
 s6100/scripts/platform_sensors.py usr/local/bin

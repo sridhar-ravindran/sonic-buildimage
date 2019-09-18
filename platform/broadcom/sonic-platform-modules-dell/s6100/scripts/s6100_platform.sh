@@ -218,9 +218,21 @@ reset_muxes() {
 }
 
 track_reboot_reason() {
-    /usr/share/sonic/device/x86_64-dell_s6100_c2538-r0/track_reboot_reason.sh
-    status=$(echo $?)
-    return status
+    if [[ -d /sys/devices/platform/SMF.512/hwmon/ ]]; then
+        rv=$(cd /sys/devices/platform/SMF.512/hwmon/*; cat mb_poweron_reason)
+        reason=$(echo $rv | cut -d 'x' -f2)
+        if [ $reason == "ff" ]; then
+            cd /sys/devices/platform/SMF.512/hwmon/*
+            if [[ -e /tmp/notify_firstboot_to_platform ]]; then
+                echo 0x01 > mb_poweron_reason
+            else
+                echo 0xbb > mb_poweron_reason
+            fi
+        elif [ $reason == "bb" ] || [ $reason == "1" ]; then
+            cd /sys/devices/platform/SMF.512/hwmon/*
+            echo 0xaa > mb_poweron_reason
+        fi
+    fi
 }
 
 install_python_api_package() {

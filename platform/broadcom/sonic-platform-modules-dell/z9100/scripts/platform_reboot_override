@@ -1,15 +1,10 @@
 #!/usr/bin/python
 import sys
 import os
-import subprocess
 import struct
 
 PORT_RES = '/dev/port'
 
-
-def track_reboot():
-    res = subprocess.check_output(['/usr/share/sonic/device/x86_64-dell_z9100_c2538-r0/platform_plugin'])
-    return
 
 def portio_reg_write(resource, offset, val):
     fd = os.open(resource, os.O_RDWR)
@@ -26,6 +21,5 @@ def portio_reg_write(resource, offset, val):
     os.close(fd)
 
 if __name__ == "__main__":
-    track_reboot()
     portio_reg_write(PORT_RES, 0xcf9, 0xe)
 

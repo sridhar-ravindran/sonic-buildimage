@@ -200,12 +200,6 @@ init_switch_port_led() {
 
 }
 
-track_reboot_reason() {
-    /usr/share/sonic/device/x86_64-dell_z9100_c2538-r0/track_reboot_reason.sh
-    status=$(echo $?)
-    return status
-}
-
 install_python_api_package() {
     device="/usr/share/sonic/device"
     platform=$(/usr/local/bin/sonic-cfggen -H -v DEVICE_METADATA.localhost.platform)
@@ -228,7 +222,6 @@ if [[ "$1" == "init" ]]; then
     modprobe dell_ich
     modprobe dell_mailbox
     modprobe dell_z9100_cpld
-    track_reboot_reason
 
     cpu_board_mux "new_device"
     switch_board_mux "new_device"
